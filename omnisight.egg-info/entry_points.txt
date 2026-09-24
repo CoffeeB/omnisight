@@ -1,0 +1,2 @@
+[console_scripts]
+omnisight = run_experiment:main

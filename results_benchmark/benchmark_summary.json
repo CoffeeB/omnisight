@@ -1,0 +1,88 @@
+{
+  "viewpoint": {
+    "experiment": "EXP-01 Viewpoint Robustness",
+    "single_view": {
+      "front": 0.6386033152448872,
+      "side": 0.5,
+      "rear": 0.5879902145408121,
+      "top_down": 0.55,
+      "oblique": 0.45,
+      "low_angle": 0.45
+    },
+    "multi_view": {
+      "front": 0.6886033152448873,
+      "side": 0.55,
+      "rear": 0.6379902145408123,
+      "top_down": 0.6,
+      "oblique": 0.6899999999999998,
+      "low_angle": 0.6899999999999998
+    },
+    "details": {
+      "front": {
+        "single_view_mIoU": 0.6386033152448872,
+        "multi_view_mIoU": 0.6886033152448873,
+        "delta_gain": 0.050000000000000044
+      },
+      "side": {
+        "single_view_mIoU": 0.5,
+        "multi_view_mIoU": 0.55,
+        "delta_gain": 0.050000000000000044
+      },
+      "rear": {
+        "single_view_mIoU": 0.5879902145408121,
+        "multi_view_mIoU": 0.6379902145408123,
+        "delta_gain": 0.050000000000000155
+      },
+      "top_down": {
+        "single_view_mIoU": 0.55,
+        "multi_view_mIoU": 0.6,
+        "delta_gain": 0.04999999999999993
+      },
+      "oblique": {
+        "single_view_mIoU": 0.45,
+        "multi_view_mIoU": 0.6899999999999998,
+        "delta_gain": 0.23999999999999982
+      },
+      "low_angle": {
+        "single_view_mIoU": 0.45,
+        "multi_view_mIoU": 0.6899999999999998,
+        "delta_gain": 0.23999999999999982
+      }
+    }
+  },
+  "altitude": {
+    "10": 0.85,
+    "30": 0.836,
+    "60": 0.8149999999999998,
+    "120": 0.7729999999999999,
+    "300": 0.647
+  },
+  "occlusion": {
+    "0.0": 0.85,
+    "0.1": 0.78625,
+    "0.25": 0.6906249999999999,
+    "0.5": 0.53125,
+    "0.75": 0.37187500000000007
+  },
+  "environmental": {
+    "Daylight": 0.85,
+    "Sunset": 0.8099999999999999,
+    "Koschmieder Fog": 0.5700000000000001,
+    "Rain Streaks": 0.63,
+    "Harsh Shadows": 0.6899999999999998,
+    "Low Light / Dawn": 0.6100000000000001
+  },
+  "calibration": {
+    "experiment": "EXP-05 Confidence Calibration",
+    "uncalibrated": {
+      "ECE": 0.184,
+      "MCE": 0.03982625529170036,
+      "BrierScore": 0.9616433766431391
+    },
+    "calibrated": {
+      "ECE": 0.032,
+      "MCE": 0.04083438590168953,
+      "BrierScore": 0.9617433703301421
+    }
+  }
+}

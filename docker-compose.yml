@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  omnisight-benchmarks:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omnisight_research_runner
+    volumes:
+      - ./:/workspace/OmniSight
+      - ./datasets:/workspace/OmniSight/datasets
+      - ./results_benchmark:/workspace/OmniSight/results_benchmark
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PYTHONPATH=/workspace/OmniSight
+    command: python3 run_experiment.py --experiment all --output-dir ./results_benchmark
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
