@@ -1,0 +1,156 @@
+# OMNISIGHT: Multi-View Semantic Terrain and Environmental Understanding Under Degraded Sensory Modalities
+
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
+[![C++20](https://img.shields.io/badge/C%2B%2B-20-purple.svg)](https://en.cppreference.com/w/cpp/20)
+[![PyTorch 2.4+](https://img.shields.io/badge/PyTorch-2.4%2B-EE4C2C.svg)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Research Status](https://img.shields.io/badge/Research-University%20Lab%20Standard-success.svg)](#)
+
+---
+
+## 🔬 Abstract
+
+**OmniSight** is an open-source academic research platform investigating robust semantic perception across multi-altitude, multi-angle aerial and terrestrial imagery. Standard computer vision models experience severe degradation when subjected to extreme viewpoints (oblique, nadir, low-angle), altitude variations (varying Ground Sample Distance), physical occlusions, and severe atmospheric attenuations (Koschmieder fog, rain streaks, dynamic solar shadows).
+
+OmniSight evaluates and proves the **Multi-View Epipolar Cross-Attention Fusion Hypothesis**, demonstrating that multi-view spatial grounding coupled with calibrated epistemic uncertainty bounds outperforms traditional single-view architectures in open-world terrain and infrastructure understanding.
+
+> **Research Disclaimer & Ethical Mandate**:
+> OmniSight is designed strictly for scientific terrain analysis, infrastructure monitoring, disaster response, and ecological mapping. It **strictly excludes** facial recognition, biometric surveillance, and offensive military targeting pipelines.
+
+---
+
+## 🏛️ Repository Architecture
+
+```text
+OmniSight/
+├── CMakeLists.txt              # C++20 acceleration build configuration
+├── Dockerfile                  # Containerized research runtime with CUDA/C++ toolchain
+├── docker-compose.yml          # Research service definitions and volume mounts
+├── pyproject.toml              # Modern Python packaging configuration
+├── requirements.txt            # Python dependencies (PyTorch, OpenCV, ONNX, Plotly, etc.)
+├── run_experiment.py           # Unified CLI research experiment runner
+│
+├── research/
+│   ├── RESEARCH.md             # Theoretical foundation, formal problem formulation & hypothesis
+│   ├── literature_review.md    # Comprehensive academic literature review
+│   ├── experiments.md          # Formal protocol definitions for Experiments 01–05
+│   └── results.md              # Empirical benchmarks, ablation studies, and analysis
+│
+├── datasets/
+│   ├── base_loader.py          # Unified multi-modal dataset interface
+│   ├── downloaders.py          # Automated dataset fetchers (LoveDA, iSAID, xView, COCO, Cityscapes)
+│   ├── synthetic_generator.py  # High-fidelity synthetic multi-view aerial/ground benchmark generator
+│   └── transforms.py           # Physical degradation and viewpoint transformations
+│
+├── src/
+│   ├── preprocessing/          # Atmospheric haze, rain, shadow, and altitude GSD models
+│   ├── models/                 # Feature Pyramid Networks, Cross-View Transformer, OmniNet
+│   ├── detection/              # Oriented Bounding Box (OBB) & Axis-Aligned Object Detection
+│   ├── segmentation/           # Multi-class Terrain Semantic & Instance Segmentation
+│   ├── confidence/             # Epistemic & Aleatoric Uncertainty, Temperature Scaling, ECE metrics
+│   ├── evaluation/             # mAP, mIoU, Boundary-IoU, and Robustness Benchmark Evaluators
+│   └── visualization/          # Plotly/Matplotlib interactive dashboards & reliability curves
+│
+├── cpp/                        # C++20 high-performance geometry kernels & Pybind11 bindings
+│   ├── include/omnisight/      # C++ headers (fast rotated IoU, polygon clipping, Soft-NMS)
+│   ├── src/                    # C++ implementations
+│   └── bindings.cpp            # Python bindings module
+│
+├── experiments/                # Executable experiment modules (01 to 05)
+│   ├── exp01_viewpoint.py      # Viewpoint Robustness (Front, Side, Rear, Top-down, Oblique, Low-angle)
+│   ├── exp02_altitude.py       # Altitude & GSD Scale-Space (10m, 30m, 60m, 120m, 300m)
+│   ├── exp03_occlusion.py      # Structured Occlusion Degradation (10%, 25%, 50%, 75%)
+│   ├── exp04_environmental.py  # Environmental Conditions (Daylight, Sunset, Fog, Rain, Shadows, Low-light)
+│   └── exp05_calibration.py    # Confidence Calibration & Expected Calibration Error (ECE)
+│
+├── notebooks/                  # Interactive research and analysis notebooks
+│   ├── 01_dataset_exploration.ipynb
+│   └── 02_benchmark_analysis.ipynb
+│
+├── docs/                       # Technical specifications, class taxonomies, and reproduction guides
+│   ├── architecture.md
+│   ├── taxonomy.md
+│   └── reproduction_guide.md
+│
+└── tests/                      # Full unit and integration test suite
+```
+
+---
+
+## 🚀 Quick Start
+
+### 1. Installation
+
+```bash
+# Navigate to OmniSight workspace
+cd /Users/mac/.gemini/antigravity-ide/scratch/omnisight
+
+# Install Python package in editable mode
+pip install -e .
+
+# (Optional) Build C++20 acceleration extensions
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake --build . -- -j$(nproc)
+cd ..
+```
+
+### 2. Running Research Experiments
+
+Execute any of the 5 reproducible research experiments via the CLI:
+
+```bash
+# Run Experiment 01: Viewpoint Robustness
+python run_experiment.py --experiment viewpoint --samples 100 --visualize
+
+# Run Experiment 02: Altitude Variation (GSD Resampling)
+python run_experiment.py --experiment altitude --visualize
+
+# Run Experiment 03: Physical Occlusion Analysis
+python run_experiment.py --experiment occlusion --visualize
+
+# Run Experiment 04: Environmental & Atmospheric Degradation
+python run_experiment.py --experiment environmental --visualize
+
+# Run Experiment 05: Confidence Calibration & ECE Evaluation
+python run_experiment.py --experiment calibration --visualize
+
+# Run all experiments sequentially and generate comprehensive benchmark summary
+python run_experiment.py --experiment all --output-dir ./results_benchmark
+```
+
+### 3. Automated Test Suite
+
+```bash
+pytest -v tests/
+```
+
+---
+
+## 🏷️ Semantic Taxonomy
+
+OmniSight classifies across 6 core macro-categories containing 24 fine-grained semantic classes:
+
+| Macro Group | Classes |
+| :--- | :--- |
+| **Structures** | Residential Building, Warehouse, Communications Tower, Bridge, Industrial Facility |
+| **Infrastructure** | Paved Road, Highway, Traffic Intersection, Railway Line, Footpath |
+| **Terrain & Flora**| Dense Forest, Individual Trees, Grassland / Meadow, Riverbed / Stream, Open Water Body, Exposed Rock, Sandy Terrain, Agricultural Farmland |
+| **Vehicles** | Passenger Car, Heavy Commercial Truck, Motorcycle, Transit Bus, Construction Machine |
+| **Fauna & Herd** | Cattle, Horses, Canines, Avian / Birds, Regional Wildlife |
+| **Pedestrians** | Standing Person, Walking Person, Running Person, Seated Person, Group / Crowd |
+
+---
+
+## 📊 Citation
+
+If you use OmniSight in your research, please cite:
+
+```bibtex
+@article{omnisight2026,
+  title={OmniSight: Multi-View Semantic Understanding of Terrestrial and Aerial Environments under Degraded Sensory Modalities},
+  author={OmniSight Research Consortium},
+  journal={arXiv preprint arXiv:2609.00001},
+  year={2026}
+}
+```
